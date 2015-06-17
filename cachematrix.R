@@ -5,16 +5,16 @@
 ##     previously cached, the cached result is retrieved.
 
 
-## This function will create a special matrix object with methods which can be invoked
-##     to set and get the value of a matrix, and to set and get the value
-##     of the inverse of that matrix.
+## This function is passed a matrix and will create a special matrix object with methods
+##     which can be invoked to set and get that matrix, and to set and get
+##     the inverse of that matrix.
 
 makeCacheMatrix <- function(x = matrix()) {
         i <- NULL
         
         set <- function(y) {
-        x <<- y
-		    i <<- NULL
+                x <<- y
+		        i <<- NULL
         }
       
         get <- function() x
@@ -28,21 +28,21 @@ makeCacheMatrix <- function(x = matrix()) {
                 getinverse = getinverse)
 }
 
-## This function will take a special matrix object x as created by the function
-##     makeCacheMatrix(), and will return the inverse of x.
+## This function is passed a special matrix object as created by the function
+##     makeCacheMatrix(), and will return the inverse of that object's matrix.
 
 cacheSolve <- function(x, ...) {
-	      ## If the inverse of x has been previously cached, print a message & return the cached
-      	## inverse of x.
-	      i <- x$getinverse()
-	      if(!is.null(i)) {
-		            message("getting cached data")
-		            return(i)
-	      }
+	    ## If the inverse of the matrix has been previously cached, display a message & return the cached
+      	## inverse.
+	    i <- x$getinverse()
+	    if(!is.null(i)) {
+		        message("getting cached data")
+		        return(i)
+	    }
 
-	      ##  Otherwise, calculate the inverse of x, cache it, and return it.)
-	      data <- x$get()
+	    ##  Otherwise, calculate the inverse of the matrix, cache it, and return it.)
+	    data <- x$get()
       	i <- solve(data, ...)
-	      x$setinverse(i)
-	      i
+	    x$setinverse(i)
+	    i
 }
